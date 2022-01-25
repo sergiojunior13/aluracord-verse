@@ -113,7 +113,7 @@ export default function PaginaInicial() {
                             flexDirection: 'column',
                             alignItems: 'center',
                             maxWidth: '200px',
-                            padding: '16px',
+                            padding: '14px',
                             backgroundColor: appConfig.theme.colors.neutrals[800],
                             borderRadius: '10px',
                             flex: 1,
@@ -124,6 +124,7 @@ export default function PaginaInicial() {
                             styleSheet={{
                                 borderRadius: '50%',
                                 marginBottom: '10px',
+                                width: '140px',
                             }}
                             src={`https://github.com/${username}.png`}
                             onError={function (event) {
@@ -150,7 +151,7 @@ export default function PaginaInicial() {
                                 backgroundColor: appConfig.theme.colors.neutrals[900],
                                 padding: '3px 10px',
                                 borderRadius: '1000px',
-                                fontSize: '14px',
+                                fontSize: '13px',
                                 margin: '5px 0',
                             }}
                         >
