@@ -46,23 +46,8 @@ function Titulo(props) {
     )
 }
 
-//Componente React
-// function HomePage() {
-//     //JSX
-//     return (
-//         <div>
-//             <GlobalStyle />
-//             <Titulo tag="h1">Boas Vindas de Volta!</Titulo>
-//             <h2>Aluracord - Alura Matrix</h2>
-//         </div>
-
-// //     )
-// // }
-
-// export default HomePage
-
 export default function PaginaInicial() {
-    const username = 'SergioJunior13';
+    var username = 'SergioJunior13';
 
     return (
         <>
@@ -70,9 +55,10 @@ export default function PaginaInicial() {
             <Box
                 styleSheet={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    backgroundColor: appConfig.theme.colors.primary[500],
-                    backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
+                    backgroundColor: appConfig.theme.colors.primary[300],
+                    backgroundImage: 'url(https://cdn.pixabay.com/photo/2021/12/11/15/06/northern-lights-6862969_960_720.jpg)',
                     backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
+                    backgroundPosition: 'top',
                 }}
             >
                 <Box
@@ -138,8 +124,6 @@ export default function PaginaInicial() {
                             maxWidth: '200px',
                             padding: '16px',
                             backgroundColor: appConfig.theme.colors.neutrals[800],
-                            border: '1px solid',
-                            borderColor: appConfig.theme.colors.neutrals[999],
                             borderRadius: '10px',
                             flex: 1,
                             minHeight: '240px',
