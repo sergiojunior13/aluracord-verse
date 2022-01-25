@@ -21,6 +21,7 @@ function Titulo(props) {
 
 export default function PaginaInicial() {
     const [username, setUsername] = React.useState("SergioJunior13")
+    const [name, setName] = React.useState("")
     const roteamento = useRouter()
 
     return (
@@ -67,9 +68,17 @@ export default function PaginaInicial() {
                         </Text>
 
                         <TextField
-                            value={username}
-                            onChange={function (event) {
-                                setUsername(event.target.value)
+                            onChange={event => {
+                                fetch(`https://api.github.com/users/${event.target.value}`)
+                                    .then(async data => {
+                                        var obj = await data.json()
+                                        setName(obj.name)
+                                        setUsername(obj.login || event.target.value || "Usuário não encontrado")
+                                    })
+                                    .catch(error => {
+                                        console.log(error)
+                                        return ''
+                                    })
                             }}
 
                             fullWidth
@@ -114,24 +123,37 @@ export default function PaginaInicial() {
                         <Image
                             styleSheet={{
                                 borderRadius: '50%',
-                                marginBottom: '16px',
+                                marginBottom: '10px',
                             }}
                             src={`https://github.com/${username}.png`}
-                            onError = {function(event) {
+                            onError={function (event) {
                                 event.target.src = "https://openclipart.org/download/247319/abstract-user-flat-3.svg"
-                                
+
                             }}
                         />
-                        <Text
+                        <Text /* Nome*/
                             variant="body4"
                             styleSheet={{
                                 color: appConfig.theme.colors.neutrals[200],
                                 backgroundColor: appConfig.theme.colors.neutrals[900],
                                 padding: '3px 10px',
-                                borderRadius: '1000px'
+                                borderRadius: '1000px',
+                                fontSize: '14px',
                             }}
                         >
-                            {username || "Usuário não encontrado"}
+                            {name}
+                        </Text>
+                        <Text
+                            variant="body4"
+                            styleSheet={{
+                                color: appConfig.theme.colors.neutrals[200],
+                                padding: '3px 10px',
+                                borderRadius: '1000px',
+                                fontSize: '12px',
+                                margin: '5px 0',
+                            }}
+                        >
+                            {"@" + username}
                         </Text>
                     </Box>
                     {/* Photo Area */}
