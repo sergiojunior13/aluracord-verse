@@ -1,3 +1,5 @@
+import Head from 'next/head'
+
 function GlobalStyle() {
     return (
         <style global jsx>{`
@@ -33,6 +35,10 @@ export default function ({ Component, pageProps }) {
     return (
         <>
             <GlobalStyle />
+            <Head>
+                <title>Aluracord - Verse</title>
+                <link rel='icon' href='https://upload.wikimedia.org/wikipedia/commons/4/47/React.svg'/>
+            </Head>
             <Component {...pageProps} />
         </>
     )
