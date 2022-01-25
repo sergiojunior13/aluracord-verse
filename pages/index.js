@@ -135,10 +135,10 @@ export default function PaginaInicial() {
                             variant="body4"
                             styleSheet={{
                                 color: appConfig.theme.colors.neutrals[200],
-                                backgroundColor: appConfig.theme.colors.neutrals[900],
+                                // backgroundColor: appConfig.theme.colors.neutrals[900],
                                 padding: '3px 10px',
                                 borderRadius: '1000px',
-                                fontSize: '14px',
+                                fontSize: '16px',
                             }}
                         >
                             {name}
@@ -147,9 +147,10 @@ export default function PaginaInicial() {
                             variant="body4"
                             styleSheet={{
                                 color: appConfig.theme.colors.neutrals[200],
+                                backgroundColor: appConfig.theme.colors.neutrals[900],
                                 padding: '3px 10px',
                                 borderRadius: '1000px',
-                                fontSize: '12px',
+                                fontSize: '14px',
                                 margin: '5px 0',
                             }}
                         >
