@@ -3,7 +3,7 @@ import React from 'react';
 import appConfig from '../config.json';
 
 export default function ChatPage() {
-    const from = "SergioJunior13"
+    const from = appConfig.username
     const [mensagem, setMensagem] = React.useState("")
     const [listaMensagem, setListaMensagem] = React.useState([])
 
@@ -79,9 +79,11 @@ export default function ChatPage() {
                                 }
                             }}
                             placeholder="Insira sua mensagem aqui..."
-                            type="textarea"
+                            type='textarea'
                             styleSheet={{
-                                width: '100%',
+                                height: '50px',
+                                width: "100%",
+                                overflowY: "visible",
                                 border: '0',
                                 resize: 'none',
                                 borderRadius: '5px',
@@ -102,12 +104,26 @@ function Header() {
     return (
         <>
             <Box styleSheet={{ width: '100%', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} >
-                <Text variant='heading5'>
-                    Chat
-                </Text>
+                <Box variant='heading5'
+                    styleSheet={{
+                        display: "flex"
+                    }}
+                >
+                    <Image
+                        styleSheet={{
+                            width: '20px',
+                            height: '20px',
+                            borderRadius: '50%',
+                            display: 'inline-block',
+                            marginRight: '5px',
+                        }}
+                        src={`https://github.com/${appConfig.username}.png`}
+                    />
+                    {appConfig.username}
+                </Box>
                 <Button
                     variant='tertiary'
-                    colorVariant='neutral'
+                    colorVariant='light'
                     label='Logout'
                     href="/"
                 />
@@ -128,6 +144,7 @@ function MessageList(props) {
                 flex: 1,
                 color: appConfig.theme.colors.neutrals["000"],
                 marginBottom: '16px',
+                paddingRight: "10px",
             }}
         >
             {props.mensagens.map(mensagem => {
@@ -143,11 +160,14 @@ function MessageList(props) {
                                 backgroundColor: appConfig.theme.colors.neutrals[700],
                             },
                             whiteSpace: "pre-line",
+                            fontFamily: "'Outfit', sans-serif",
                         }}
                     >
                         <Box
                             styleSheet={{
                                 marginBottom: '8px',
+                                display: "flex",
+                                alignItems: "center"
                             }}
                         >
                             <Image
@@ -156,11 +176,14 @@ function MessageList(props) {
                                     height: '20px',
                                     borderRadius: '50%',
                                     display: 'inline-block',
-                                    marginRight: '8px',
+                                    marginRight: '5px',
                                 }}
                                 src={`https://github.com/${mensagem.de}.png`}
                             />
-                            <Text tag="strong">
+                            <Text tag="strong" styleSheet={{
+                                fontFamily: "'Outfit', sans-serif",
+                                fontSize: "15px",
+                            }}>
                                 {mensagem.de}
                             </Text>
                             <Text

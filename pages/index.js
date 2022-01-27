@@ -23,6 +23,7 @@ export default function PaginaInicial() {
     const [username, setUsername] = React.useState("SergioJunior13")
     const [name, setName] = React.useState("")
     const roteamento = useRouter()
+    const [userExiste, setUserExiste] = React.useState(false)
 
     return (
         <>
@@ -55,7 +56,10 @@ export default function PaginaInicial() {
                         as="form"
                         onSubmit={function (event) {
                             event.preventDefault()
-                            roteamento.push("/chat")
+                            if (userExiste) {
+                                appConfig.username = username
+                                roteamento.push("/chat")
+                            }
                         }}
                         styleSheet={{
                             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
@@ -66,27 +70,53 @@ export default function PaginaInicial() {
                         <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
                             {appConfig.name}
                         </Text>
+                        <Text
+                            tag="label"
+                            className="userNotFound"
+                            styleSheet={{
+                                color: "red",
+                                fontSize: "14px",
+                                fontWeight: "300",
+                                alignSelf: "start",
+                                padding: "3px",
+                            }}
 
+                        >
+                            {userExiste ? "" : "Usuário não encontrado"}
+                        </Text>
                         <TextField
                             onChange={event => {
                                 fetch(`https://api.github.com/users/${event.target.value}`)
                                     .then(async data => {
                                         var obj = await data.json()
-                                        setName(obj.name)
-                                        setUsername(obj.login || event.target.value || "Usuário não encontrado")
+                                        if (obj.message == undefined) {
+                                            setUserExiste(true)
+                                            setName(obj.name)
+                                            setUsername(obj.login)
+                                        }
+                                        else if (obj.message == "Not Found" || event.target.value == "") {
+                                            setUserExiste(false)
+                                            setName("")
+                                            setUsername("Usuário não encontrado")
+                                        }
+                                        else {
+                                            setUserExiste(true)
+                                            setName("")
+                                            setUsername(event.target.value)
+                                        }
                                     })
                                     .catch(error => {
                                         console.log(error)
                                         return ''
                                     })
                             }}
-
+                            placeholder="Usuário do Github"
                             fullWidth
                             textFieldColors={{
                                 neutral: {
                                     textColor: appConfig.theme.colors.neutrals[200],
-                                    mainColor: appConfig.theme.colors.neutrals[900],
-                                    mainColorHighlight: appConfig.theme.colors.primary[500],
+                                    mainColor: userExiste ? appConfig.theme.colors.neutrals[900] : "red",
+                                    mainColorHighlight: userExiste ? appConfig.theme.colors.primary[500] : "red",
                                     backgroundColor: appConfig.theme.colors.neutrals[800],
                                 },
                             }}
@@ -155,7 +185,7 @@ export default function PaginaInicial() {
                                 margin: '5px 0',
                             }}
                         >
-                            {"@" + username}
+                            {username}
                         </Text>
                     </Box>
                     {/* Photo Area */}

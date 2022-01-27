@@ -27,6 +27,21 @@ function GlobalStyle() {
                 flex: 1;
             }
             /* ./App fit Height */ 
+
+            ::-webkit-scrollbar-track {
+	            background-color: #0003;
+                border-radius: 3px;
+            }
+
+            ::-webkit-scrollbar {
+                width: 8px;
+                background-color: transparent;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background-color: #0004;
+                border-radius: 3px;
+            }
     `}</style>
     )
 }
@@ -37,7 +52,7 @@ export default function ({ Component, pageProps }) {
             <GlobalStyle />
             <Head>
                 <title>Aluracord - Verse</title>
-                <link rel='icon' href='https://upload.wikimedia.org/wikipedia/commons/4/47/React.svg'/>
+                <link rel='icon' href='https://upload.wikimedia.org/wikipedia/commons/4/47/React.svg' />
             </Head>
             <Component {...pageProps} />
         </>
