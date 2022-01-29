@@ -58,7 +58,7 @@ export default function PaginaInicial() {
                             event.preventDefault()
                             if (userExiste) {
                                 appConfig.username = username
-                                roteamento.push("/chat")
+                                roteamento.push(`/chat?username=${username}`)
                             }
                         }}
                         styleSheet={{
