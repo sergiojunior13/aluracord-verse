@@ -25,6 +25,32 @@ export default function PaginaInicial() {
     const roteamento = useRouter()
     const [userExiste, setUserExiste] = React.useState(false)
 
+    function getGithubUser(event) {
+        fetch(`https://api.github.com/users/${event.target.value}`)
+            .then(async data => {
+                var obj = await data.json()
+                if (obj.message == undefined) {
+                    setUserExiste(true)
+                    setName(obj.name)
+                    setUsername(obj.login)
+                }
+                else if (obj.message == "Not Found" || event.target.value == "") {
+                    setUserExiste(false)
+                    setName("")
+                    setUsername("Usuário não encontrado")
+                }
+                else {
+                    setUserExiste(true)
+                    setName("")
+                    setUsername(event.target.value)
+                }
+            })
+            .catch(error => {
+                console.log(error)
+                return ''
+            })
+    }
+
     return (
         <>
             <Box
@@ -85,31 +111,7 @@ export default function PaginaInicial() {
                             {userExiste ? "" : "Usuário não encontrado"}
                         </Text>
                         <TextField
-                            onChange={event => {
-                                fetch(`https://api.github.com/users/${event.target.value}`)
-                                    .then(async data => {
-                                        var obj = await data.json()
-                                        if (obj.message == undefined) {
-                                            setUserExiste(true)
-                                            setName(obj.name)
-                                            setUsername(obj.login)
-                                        }
-                                        else if (obj.message == "Not Found" || event.target.value == "") {
-                                            setUserExiste(false)
-                                            setName("")
-                                            setUsername("Usuário não encontrado")
-                                        }
-                                        else {
-                                            setUserExiste(true)
-                                            setName("")
-                                            setUsername(event.target.value)
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.log(error)
-                                        return ''
-                                    })
-                            }}
+                            onChange={event => getGithubUser(event)}
                             placeholder="Usuário do Github"
                             fullWidth
                             textFieldColors={{

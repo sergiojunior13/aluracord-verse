@@ -14,6 +14,11 @@ function GlobalStyle() {
             body {
                 font-family: 'Outfit', sans-serif;
             }
+
+            li {
+                overflow-wrap: break-word;
+            }
+
             /* App fit Height */ 
             html, body, #__next {
                 min-height: 100vh;
