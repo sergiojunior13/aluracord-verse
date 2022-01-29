@@ -120,7 +120,7 @@ export default function ChatPage() {
                         <TextField
                             value={mensagem}
                             onChange={event => {
-                                if (event.target.value.length <= 700) {
+                                if (event.target.value.length <= 2600) {
                                     setMensagem(event.target.value)
                                 }
                             }}
