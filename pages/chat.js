@@ -9,8 +9,6 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsI
 const SUPABASE_URL = "https://nhjpnxilzupdjrftvpor.supabase.co"
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY)
 
-
-
 export default function ChatPage() {
     const router = useRouter()
     appConfig.username = router.query.username || "SergioJunior13"
@@ -94,7 +92,6 @@ export default function ChatPage() {
                 tag="ul"
                 styleSheet={{
                     overflowY: 'scroll',
-                    scrollBar: "",
                     display: 'flex',
                     flexDirection: "column-reverse",
                     flex: 1,
@@ -159,6 +156,7 @@ export default function ChatPage() {
                                     <Text tag="strong" styleSheet={{
                                         fontFamily: "'Outfit', sans-serif",
                                         fontSize: "15px",
+                                        width: "100px"
                                     }}>
                                         {mensagem.de}
                                     </Text>
@@ -270,7 +268,9 @@ export default function ChatPage() {
                         <TextField
                             value={mensagem}
                             onChange={event => {
-                                setMensagem(event.target.value)
+                                if (event.target.value.length <= 700) {
+                                    setMensagem(event.target.value)
+                                }
                             }}
 
                             onKeyPress={event => {
