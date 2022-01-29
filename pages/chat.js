@@ -163,7 +163,7 @@ export default function ChatPage() {
                             />
                         </Box>
                         <ButtonSendMessage
-                            onClick={() => { handleNovaMensagem(mensagem) }}
+                            onClick={() => { if (mensagem != "") handleNovaMensagem(mensagem) }}
                         />
                     </Box>
                 </Box>
