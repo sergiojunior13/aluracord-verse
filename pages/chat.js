@@ -133,8 +133,7 @@ export default function ChatPage() {
                                 onChange={event => {
                                     if (event.target.value.length <= 2600) {
                                         setMensagem(event.target.value)
-                                    }
-                                }}
+                                    }}}
                                 onKeyPress={event => {
                                     if (event.key == "Enter" && event.shiftKey == false) {
                                         event.preventDefault()
