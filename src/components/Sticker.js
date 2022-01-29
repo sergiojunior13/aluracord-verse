@@ -6,7 +6,8 @@ export function Sticker(props) {
         <>
             <Image src={props.src} styleSheet={{
                 maxWidth: "300px",
-                width: "100%"
+                width: "100%",
+                borderRadius: "5px",
             }} />
         </>
     )

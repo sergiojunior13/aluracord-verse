@@ -3,7 +3,7 @@ import React from 'react';
 import appConfig from '../config.json';
 import { createClient } from '@supabase/supabase-js';
 import { useRouter } from 'next/router';
-import { ButtonSendSticker, MessageList, Header } from "../src/components/exportComponents"
+import { ButtonSendSticker, ButtonSendMessage, MessageList, Header } from "../src/components/exportComponents"
 
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMwODc4MSwiZXhwIjoxOTU4ODg0NzgxfQ.RHFr2LH8sUn0MiOI9tlFVEW6gN6B3ytFIMbg35U1EqA"
 const SUPABASE_URL = "https://nhjpnxilzupdjrftvpor.supabase.co"
@@ -113,43 +113,58 @@ export default function ChatPage() {
                     <Box
                         as="form"
                         styleSheet={{
-                            display: 'flex',
-                            alignItems: 'center',
+                            display: "flex",
+                            alignItems: "center",
                         }}
                     >
-                        <TextField
-                            value={mensagem}
-                            onChange={event => {
-                                if (event.target.value.length <= 2600) {
-                                    setMensagem(event.target.value)
-                                }
-                            }}
-
-                            onKeyPress={event => {
-                                if (event.key == "Enter" && event.shiftKey == false) {
-                                    event.preventDefault()
-                                    if (event.target.value != "") handleNovaMensagem(mensagem)
-                                }
-                            }}
-                            placeholder="Insira sua mensagem aqui..."
-                            type='textarea'
+                        <Box
                             styleSheet={{
-                                height: '50px',
-                                width: "100%",
-                                overflowY: "visible",
-                                border: '0',
-                                resize: 'none',
-                                borderRadius: '5px',
-                                padding: '6px 8px',
+                                display: 'flex',
+                                width: "calc(100% - 50px)",
+                                alignItems: 'center',
+                                justifyContent: "center",
+                                marginRight: "10px",
                                 backgroundColor: appConfig.theme.colors.neutrals[800],
-                                marginRight: '12px',
-                                color: appConfig.theme.colors.neutrals[200],
+                                borderRadius: '10px',
                             }}
-                        />
-                        <ButtonSendSticker
-                            onStickerClick={(sticker) => {
-                                handleNovaMensagem(`:sticker:${sticker}`)
-                            }}
+                        >
+                            <TextField
+                                value={mensagem}
+                                onChange={event => {
+                                    if (event.target.value.length <= 2600) {
+                                        setMensagem(event.target.value)
+                                    }
+                                }}
+                                onKeyPress={event => {
+                                    if (event.key == "Enter" && event.shiftKey == false) {
+                                        event.preventDefault()
+                                        if (event.target.value != "") handleNovaMensagem(mensagem)
+                                    }
+                                }}
+                                placeholder="Insira sua mensagem aqui..."
+                                type='textarea'
+                                styleSheet={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    height: '50px',
+                                    width: "100%",
+                                    border: '0',
+                                    resize: 'none',
+                                    borderRadius: '10px',
+                                    padding: '6px 8px',
+                                    backgroundColor: appConfig.theme.colors.neutrals[800],
+                                    marginRight: '12px',
+                                    color: appConfig.theme.colors.neutrals[200],
+                                }}
+                            />
+                            <ButtonSendSticker
+                                onStickerClick={(sticker) => {
+                                    handleNovaMensagem(`:sticker:${sticker}`)
+                                }}
+                            />
+                        </Box>
+                        <ButtonSendMessage
+                            onClick={() => { handleNovaMensagem(mensagem) }}
                         />
                     </Box>
                 </Box>

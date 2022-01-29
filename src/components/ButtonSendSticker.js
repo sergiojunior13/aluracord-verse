@@ -12,23 +12,24 @@ export function ButtonSendSticker(props) {
       }}
     >
       <Button
+      iconName='icons'
+      buttonColors={{
+        contrastColor: appConfig.theme.colors.neutrals[100],
+      }}
         styleSheet={{
           borderRadius: '50%',
           padding: '0 3px 0 0',
           minWidth: '50px',
           minHeight: '50px',
           fontSize: '20px',
-          marginBottom: '8px',
           lineHeight: '0',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: appConfig.theme.colors.neutrals[300],
+          backgroundColor: appConfig.theme.colors.neutrals[800],
           hover: {
-            filter: 'grayscale(0)',
           }
         }}
-        label="😋"
         onClick={() => setOpenState(!isOpen)}
       />
       {isOpen && (
@@ -68,6 +69,7 @@ export function ButtonSendSticker(props) {
               flex: 1,
               paddingTop: '16px',
               overflow: 'scroll',
+              overflowX: "hidden",
             }}
           >
             {appConfig.stickers.map((sticker) => (
@@ -82,6 +84,8 @@ export function ButtonSendSticker(props) {
                   width: '50%',
                   borderRadius: '5px',
                   padding: '10px',
+                  display: "flex",
+                  alignItems: "center",
                   focus: {
                     backgroundColor: appConfig.theme.colors.neutrals[600],
                   },
