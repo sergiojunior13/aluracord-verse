@@ -6,7 +6,7 @@ import { DeleteButton, Sticker } from './exportComponents';
 function generateDate(string) {
     var time = new Date(string).toLocaleTimeString().substring(0, 5)
     var date
-    switch (new Date().getDate() - new Date(string).getDay()) {
+    switch (new Date().getDate() - new Date(string).getDate()) {
         case 0:
             date = "Hoje"
             break
