@@ -4,23 +4,37 @@ import appConfig from '../../config.json';
 import { DeleteButton, Sticker } from './exportComponents';
 
 function generateDate(string) {
-    var time = new Date(string).toLocaleTimeString().substring(0, 5)
-    var date
-    switch (new Date().getDay() - new Date(string).getDay()) {
-        case 0:
-            date = "Hoje"
-            break
-        case 1:
-            date = "Ontem"
-            break
-        case 2:
-            date = "Anteontem"
-            break
-        default:
-            time = ""
-            date = new Date(string).toLocaleDateString()
-    }
+    var dataString = new Date(string)
+    var time = dataString.toLocaleTimeString().substring(0, 5)
+    var date = dataString.toLocaleDateString()
+
+    var hoje = getAnteriorDate("hoje")
+    var ontem = getAnteriorDate("ontem")
+    var anteontem = getAnteriorDate("anteontem")
+
+    if (date == hoje) date = "Hoje"
+    else if (date == ontem) date = "Ontem"
+    else if (date == anteontem) date = "Anteontem"
+
     return `${date} ${time}`
+}
+
+function getAnteriorDate(dataAnterior) {
+    var data = new Date()
+    switch (dataAnterior) {
+        case "hoje":
+            data = data.toLocaleDateString("pt-br")
+            break
+        case "ontem":
+            data.setDate(data.getDate() - 1)
+            data = data.toLocaleDateString("pt-br")
+            break
+        case "anteontem":
+            data.setDate(data.getDate() - 2)
+            data = data.toLocaleDateString("pt-br")
+            break
+    }
+    return data
 }
 
 export function MessageList(props) {
